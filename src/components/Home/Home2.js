@@ -19,23 +19,18 @@ function Home2() {
               LET ME <span className="purple"> INTRODUCE </span> MYSELF
             </h1>
             <p className="home-about-body">
-              I fell in love with programming and I have at least learnt
-              something, I think… 🤷‍♂️
+              The first programming language taught in the B.Sc. CSIT course is C programming language. After being familiar with the basics of the C programming language, I was driven to learn more programming languages. I tried to excel in almost all the programming language that was taught to us. My interest in these courses made me realize that I might have a knack for programming.
               <br />
               <br />I am fluent in classics like
               <i>
-                <b className="purple"> C++, Javascript and Python. </b>
+                <b className="purple"> C, C++, Javascript and Python. </b>
               </i>
               <br />
               <br />
-              My field of Interest's are building new &nbsp;
+              My area of interest is to become as familiar with and knowledgeable about &nbsp;
               <i>
-                <b className="purple">Web Technologies and Products </b> and
-                also in areas related to{" "}
-                <b className="purple">
-                  Deep Learning and Natural Launguage Processing.
-                </b>
-              </i>
+                <b className="purple">Web Technologies and Products </b> as possible.
+                </i>
               <br />
               <br />
               Whenever possible, I also apply my passion for developing products
