@@ -8,6 +8,15 @@ import editor from "../../Assets/Projects/codeEditor.png";
 import chatify from "../../Assets/Projects/chatify.png";
 import suicide from "../../Assets/Projects/suicide.png";
 import bitsOfCode from "../../Assets/Projects/blog.png";
+import DWITNews from "../../Assets/Projects/DWITNews.png";
+import EatPreparie from "../../Assets/Projects/EatPreparie.png";
+import FYPMobileApp from "../../Assets/Projects/FYPMobileApp.png";
+import FYPWebApp from "../../Assets/Projects/FYPWebApp.png";
+import LessonPlan from "../../Assets/Projects/LessonPlan.png";
+import MicroProject from "../../Assets/Projects/MicroProject.png";
+import MiniProject from "../../Assets/Projects/MiniProject.png";
+import SifalSchool from "../../Assets/Projects/SifalSchool.png";
+import InternManager from "../../Assets/Projects/InternManager.png";
 
 function Projects() {
   return (
@@ -20,7 +29,7 @@ function Projects() {
         <p style={{ color: "white" }}>
           Here are a few projects I've worked on recently.
         </p>
-        {/* <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
+        <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
           <Col md={4} className="project-card">
             <ProjectCard
               imgPath={chatify}
@@ -87,7 +96,7 @@ function Projects() {
               // demoLink="https://blogs.soumya-jit.tech/"      <--------Please include a demo link here 
             />
           </Col>
-        </Row> */}
+        </Row>
       </Container>
     </Container>
   );
