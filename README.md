@@ -5,7 +5,7 @@
 <div align="center">
   <img alt="Demo" src="./Images/readme-img1.png" />
 </div>
-
+&nbsp;
 <center>
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) &nbsp;
