@@ -3,37 +3,55 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { CgWebsite } from "react-icons/cg";
 import { BsGithub } from "react-icons/bs";
+import { SiVercel } from "react-icons/si";
 
-function ProjectCards(props) {
+function ProjectCards({imgPath, title, desc, demoLink, gitHubLink, vercelLink}) {
   return (
     <Card className="project-card-view">
-      <Card.Img variant="top" src={props.imgPath} alt="card-img" />
+      <Card.Img variant="top" src={imgPath} alt="card-img" />
       <Card.Body>
-        <Card.Title>{props.title}</Card.Title>
+        <Card.Title>{title}</Card.Title>
         <Card.Text style={{ textAlign: "justify" }}>
-          {props.description}
+          {desc}
         </Card.Text>
-        <Button variant="primary" href={props.ghLink} target="_blank">
-          <BsGithub /> &nbsp;
-          {props.isBlog ? "Blog" : "GitHub"}
-        </Button>
-        {"\n"}
-        {"\n"}
 
-        {/* If the component contains Demo link and if it's not a Blog then, it will render the below component  */}
+      </Card.Body>
+      
+      <Card.Footer>
 
-        {!props.isBlog && props.demoLink && (
+        {demoLink && (
           <Button
-            variant="primary"
-            href={props.demoLink}
-            target="_blank"
-            style={{ marginLeft: "10px" }}
+          variant="primary"
+          href={demoLink}
+          target="_blank"
           >
             <CgWebsite /> &nbsp;
-            {"Demo"}
+            Demo
           </Button>
         )}
-      </Card.Body>
+
+        {gitHubLink &&
+        <Button variant="primary" 
+        href={gitHubLink} 
+        target="_blank"
+        style={{ marginLeft: "10px" }}
+        >
+          <BsGithub /> &nbsp;
+          GitHub
+        </Button>
+        }
+
+        {vercelLink &&
+        <Button variant="primary" 
+        href={vercelLink} 
+        target="_blank"
+        style={{ marginLeft: "10px"}}
+        >
+          <SiVercel /> &nbsp;
+          Vercel
+        </Button>
+        }
+        </Card.Footer>
     </Card>
   );
 }
