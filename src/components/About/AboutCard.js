@@ -9,7 +9,7 @@ function AboutCard() {
         <blockquote className="blockquote mb-0">
           <p style={{ textAlign: "justify" }}>
             Hi Everyone, I am <span className="purple">Tayouth Malla </span>
-            from <span className="purple"> Baluwatar, Nepal.</span>
+            from <span className="purple"> Kathmandu, Nepal.</span>
             <br />I am a junior pursuing bachelors in B.Sc. CSIT at Deerwalk Institute of Technology.
             <br />
             <br />
