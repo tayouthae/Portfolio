@@ -1,5 +1,5 @@
 <h2 align="center">
-  Portfolio Website - v2.0<br/>
+  Tayouth's Portfolio Website<br/>
   <a href="https://tayouthmalla.com.np/" target="_blank">tayouthmalla.com.np</a>
 </h2>
 <div align="center">
