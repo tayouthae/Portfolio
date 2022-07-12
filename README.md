@@ -3,7 +3,7 @@
   <a href="https://tayouthmalla.com.np/" target="_blank">tayouthmalla.com.np</a>
 </h2>
 <div align="center">
-  <img alt="Demo" src="./Images/readme-img1.png" />
+  <img alt="Demo" src="./Images/Mockup-on-different-devices.png" />
 </div>
 &nbsp;
 <center>
