@@ -2,20 +2,22 @@ name: React Portfolio CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  deoploy:
+  # This workflow contains a single job called "deploy"
+  deploy:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # checks out the repo so that the job can access it
+      # checks out the repo so that the job can access it
       - name: Checkout Git repo
         uses: actions/checkout@v3
 
-    # Setup npm
-      -name: Set up NodeJs
+      # Setup npm
+      - name: Set up NodeJs
         uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -24,8 +26,8 @@ jobs:
       - run: npm run build
       - run: npm test
 
-    # Deploy in Cloudflare
-      -name: deploy
-      -uses: cloudflare/wrangler-action@2.0.0
-      with:
-        apiToken: ${{ secrets.PAGES_API_TOKEN }}
+      # Deploy in Cloudflare
+      - name: deploy
+        uses: cloudflare/wrangler-action@2.0.0
+        with:
+          apiToken: ${{ secrets.PAGES_API_TOKEN }}
