@@ -2,19 +2,19 @@ name: React Portfolio CI
 
 on:
   push:
-    branches:
-      - "main"
+    branches: [ main ]
 
 jobs:
-  build:
+  deoploy:
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    #checks out the repo so that the job can access it
+    # checks out the repo so that the job can access it
       - name: Checkout Git repo
         uses: actions/checkout@v3
 
-    #Setup npm
+    # Setup npm
       -name: Set up NodeJs
         uses: actions/setup-node@v3
         with:
@@ -24,7 +24,7 @@ jobs:
       - run: npm run build
       - run: npm test
 
-    #Deploy in Cloudflare
+    # Deploy in Cloudflare
       -name: deploy
       -uses: cloudflare/wrangler-action@2.0.0
       with:
