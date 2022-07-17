@@ -44,7 +44,7 @@ export const ProjectConstants = [
     imgPath: FYPWebApp,
     title: "Offline Answer Sheet Submission Web Portal",
     desc: "A blockchain-based portal which allows teacher to upload question paper which is then encrypted using AES and stored in IPFS which checks the authenticity and hash key of the file sent by the students with the help of Java web framework Spring Boot.",
-    // gitHubLink: 'https://github.com/tayouthae/FinalYearProject'
+    gitHubLink: "https://github.com/tayouthae/FinalYearProject",
   },
   {
     imgPath: MicroProject,
