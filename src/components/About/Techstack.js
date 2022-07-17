@@ -8,12 +8,9 @@ import {
   DiMongodb,
   DiPython,
   DiGit,
-  DiLaravel
+  DiLaravel,
 } from "react-icons/di";
-import {
-  SiFirebase,
-  SiNextdotjs,
-} from "react-icons/si";
+import { SiFirebase, SiNextdotjs } from "react-icons/si";
 
 function Techstack() {
   return (

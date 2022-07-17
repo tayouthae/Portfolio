@@ -10,7 +10,8 @@ function AboutCard() {
           <p style={{ textAlign: "justify" }}>
             Hi Everyone, I am <span className="purple">Tayouth Malla </span>
             from <span className="purple"> Kathmandu, Nepal.</span>
-            <br />I am a junior pursuing bachelors in B.Sc. CSIT at Deerwalk Institute of Technology.
+            <br />I am a junior pursuing bachelors in B.Sc. CSIT at Deerwalk
+            Institute of Technology.
             <br />
             <br />
             Apart from coding, some other activities that I love to do!

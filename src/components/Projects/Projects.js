@@ -16,16 +16,16 @@ function Projects() {
           Here are a few projects I've worked on recently.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
-          {ProjectConstants.map((project)=>(
+          {ProjectConstants.map((project) => (
             <Col md={4} className="project-card">
               <ProjectCard
-                  imgPath={project.imgPath}
-                  title={project.title}
-                  desc={project.desc}
-                  demoLink={project.demoLink}
-                  gitHubLink={project.gitHubLink}
-                  vercelLink={project.vercelLink}
-                  />
+                imgPath={project.imgPath}
+                title={project.title}
+                desc={project.desc}
+                demoLink={project.demoLink}
+                gitHubLink={project.gitHubLink}
+                vercelLink={project.vercelLink}
+              />
             </Col>
           ))}
         </Row>
