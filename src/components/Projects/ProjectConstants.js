@@ -56,7 +56,7 @@ export const ProjectConstants = [
     imgPath: MiniProject,
     title: "Fitness App",
     desc: "A system that employs technology to assist users in tracking their step, food, exercise, and mental health was built using Flutter and Firebase.",
-    // gitHubLink: 'https://github.com/tayouthae/MiniProject'
+    gitHubLink: "https://github.com/tayouthae/Fitness-App-Mini-Project",
   },
   {
     imgPath: FYPMobileApp,
