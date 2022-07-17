@@ -62,6 +62,6 @@ export const ProjectConstants = [
     imgPath: FYPMobileApp,
     title: "Offline Answer Sheet Submission Mobile App",
     desc: "A system which allows students to download the question paper beforehand and submit their answer sheets without the need of valid internet connection. Built using Firebase and Flutter",
-    // gitHubLink: 'https://github.com/tayouthae/FinalYearProject'
+    gitHubLink: "https://github.com/tayouthae/FinalYearProject",
   },
 ];
