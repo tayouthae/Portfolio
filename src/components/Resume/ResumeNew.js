@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Particle from "../Particle";
 import resume from "../../Assets/../Assets/Tayouth-Resume.pdf";
 import { AiOutlineDownload } from "react-icons/ai";
-import resumeImg from "../../Assets/resumeImg.jpg";
+import resumeImg from "../../Assets/Tayouth-Resume.png";
 
 function ResumeNew() {
   return (
