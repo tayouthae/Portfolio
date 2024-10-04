@@ -7,8 +7,22 @@ import MiniProject from "../../Assets/Projects/MiniProject.png";
 import SifalSchool from "../../Assets/Projects/SifalSchool.png";
 import InternManager from "../../Assets/Projects/InternManager.png";
 import DWITNews from "../../Assets/Projects/DWITNews.png";
+import Vision from "../../Assets/Projects/20Vision.png";
+import EudaimoniaWiki from "../../Assets/Projects/eudaimoniaWiki.png";
 
 export const ProjectConstants = [
+  {
+    imgPath: Vision,
+    title: "20Vision",
+    desc: "20Vision is a social network designed to improve humanity's understanding and collaboration.It is a knowledge-sharing platform along with innovative projects.",
+    demoLink: "https://www.20.vision/discover",
+  },
+  {
+    imgPath: EudaimoniaWiki,
+    title: "Eudaimonia Wiki",
+    desc: "The eudaimonia project's goal is to crowd-curate a continuously self-updating, ranked collection of humanity's most useful wisdom. It was created using Nextjs, Firestore, Nestjs along with Google Cloud Platform.",
+    demoLink: "https://www.eudaimonia.wiki/",
+  },
   {
     imgPath: EatPreparie,
     title: "Eat Preparie",
