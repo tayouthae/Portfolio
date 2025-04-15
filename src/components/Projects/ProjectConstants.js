@@ -9,8 +9,15 @@ import InternManager from "../../Assets/Projects/InternManager.png";
 import DWITNews from "../../Assets/Projects/DWITNews.png";
 import Vision from "../../Assets/Projects/20Vision.png";
 import EudaimoniaWiki from "../../Assets/Projects/eudaimoniaWiki.png";
+import BigDataProject from "../../Assets/Projects/BigDataProject.png";
 
 export const ProjectConstants = [
+  {
+    imgPath: BigDataProject,
+    title: "Big Data Project",
+    desc: "Build this project utilizing machine learning models (like Random Forest, Logistic Regression and Support Vector Machine), Fast API, Nextjs and Vercel to predict the risk of heart attack based on user-provided health metrics such as age, cholesterol level, exercise habits, stress level, and BMI.",
+    demoLink: "https://big-data-project.vercel.app",
+  },
   {
     imgPath: Vision,
     title: "20Vision",
