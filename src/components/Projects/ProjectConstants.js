@@ -9,7 +9,7 @@ import InternManager from "../../Assets/Projects/InternManager.png";
 import DWITNews from "../../Assets/Projects/DWITNews.png";
 import Vision from "../../Assets/Projects/20Vision.png";
 import EudaimoniaWiki from "../../Assets/Projects/eudaimoniaWiki.png";
-import BigDataProject from "../../Assets/Projects/BigDataProject.png";
+import BigDataProject from "../../Assets/Projects/BigDataProject.jpg";
 
 export const ProjectConstants = [
   {
