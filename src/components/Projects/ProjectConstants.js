@@ -10,8 +10,15 @@ import DWITNews from "../../Assets/Projects/DWITNews.png";
 import Vision from "../../Assets/Projects/20Vision.png";
 import EudaimoniaWiki from "../../Assets/Projects/eudaimoniaWiki.png";
 import BigDataProject from "../../Assets/Projects/BigDataProject.jpg";
+import BasketballAnalytics from "../../Assets/Projects/BasketballAnalytics.png";
 
 export const ProjectConstants = [
+  {
+    imgPath: BasketballAnalytics,
+    title: "Basketball Analytics",
+    desc: "A web application that allows users to analyze and visualize basketball data, including player statistics, team performance, and game outcomes. It was built using React, Chart.js, and Firebase to provide a comprehensive and interactive platform for basketball enthusiasts.",
+    demoLink: "https://basketball-analytical-tool.vercel.app",
+  },
   {
     imgPath: BigDataProject,
     title: "Big Data Project",
