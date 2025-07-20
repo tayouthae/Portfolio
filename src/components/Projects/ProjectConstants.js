@@ -16,7 +16,7 @@ export const ProjectConstants = [
   {
     imgPath: BasketballAnalytics,
     title: "Basketball Analytics",
-    desc: "A web application that allows users to analyze and visualize basketball data, including player statistics, team performance, and game outcomes. It was built using React, Chart.js, and Firebase to provide a comprehensive and interactive platform for basketball enthusiasts.",
+    desc: "Built a comprehensive prediction system using 7 years of college basketball data (2,136+ team records) from BartTorvik.com. Developed three ML models achieving 95.2% AUC for tournament qualification, 90.4% for upset detection, and 89.7% for deep-run predictions.",
     demoLink: "https://basketball-analytical-tool.vercel.app",
   },
   {
