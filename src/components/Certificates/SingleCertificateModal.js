@@ -1,10 +1,15 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./Certificates.css";
 
 function SingleCertificateModal({ isOpen, onClose, certificate }) {
   const [isVisible, setIsVisible] = useState(false);
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [optimalScale, setOptimalScale] = useState(1);
+  
+  const imageRef = useRef(null);
+  const containerRef = useRef(null);
   
   // Zoom state management
   const [zoomState, setZoomState] = useState({
@@ -17,6 +22,30 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
   const [panStart, setPanStart] = useState({ x: 0, y: 0 });
   const [lastDistance, setLastDistance] = useState(0);
 
+  // Calculate optimal scale for image to fit in modal
+  const calculateOptimalScale = useCallback(() => {
+    if (!imageRef.current || !containerRef.current) return 1;
+    
+    const image = imageRef.current;
+    const container = containerRef.current;
+    
+    const containerRect = container.getBoundingClientRect();
+    const imageNaturalWidth = image.naturalWidth;
+    const imageNaturalHeight = image.naturalHeight;
+    
+    if (!imageNaturalWidth || !imageNaturalHeight) return 1;
+    
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+    
+    const scaleX = containerWidth / imageNaturalWidth;
+    const scaleY = containerHeight / imageNaturalHeight;
+    
+    const optimalFitScale = Math.min(scaleX, scaleY) * 0.9;
+    
+    return Math.min(optimalFitScale, 1);
+  }, []);
+
   // Zoom utility functions
   const getDistance = (touch1, touch2) => {
     return Math.sqrt(
@@ -27,18 +56,30 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
 
   const resetZoom = useCallback(() => {
     setZoomState({
-      scale: 1,
+      scale: optimalScale,
       translateX: 0,
       translateY: 0,
       lastTap: 0
     });
-  }, []);
+  }, [optimalScale]);
+
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true);
+    const newOptimalScale = calculateOptimalScale();
+    setOptimalScale(newOptimalScale);
+    setZoomState(prev => ({
+      ...prev,
+      scale: newOptimalScale,
+      translateX: 0,
+      translateY: 0
+    }));
+  }, [calculateOptimalScale]);
 
   // Mouse wheel zoom for desktop
   const handleWheel = useCallback((e) => {
     e.preventDefault();
     const delta = e.deltaY > 0 ? 0.9 : 1.1;
-    const newScale = Math.min(Math.max(zoomState.scale * delta, 1), 4);
+    const newScale = Math.min(Math.max(zoomState.scale * delta, optimalScale), 4);
     
     if (newScale !== zoomState.scale) {
       setZoomState(prev => ({
@@ -46,23 +87,30 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
         scale: newScale
       }));
     }
-  }, [zoomState.scale]);
+  }, [zoomState.scale, optimalScale]);
 
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
-      resetZoom(); // Reset zoom when modal opens
+      setImageLoaded(false);
       document.body.style.overflow = "hidden";
     } else {
       setIsVisible(false);
       document.body.style.overflow = "unset";
-      resetZoom(); // Reset zoom when modal closes
+      setImageLoaded(false);
+      setOptimalScale(1);
+      setZoomState({
+        scale: 1,
+        translateX: 0,
+        translateY: 0,
+        lastTap: 0
+      });
     }
 
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isOpen, resetZoom]);
+  }, [isOpen]);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -87,7 +135,7 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
       // Double tap detection
       if (tapLength < 500 && tapLength > 0) {
         e.preventDefault();
-        if (zoomState.scale > 1) {
+        if (zoomState.scale > optimalScale) {
           resetZoom();
         } else {
           // Zoom to 2x at tap location
@@ -97,7 +145,7 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
           
           setZoomState(prev => ({
             ...prev,
-            scale: 2,
+            scale: Math.max(optimalScale * 2, 2),
             translateX: -centerX / 2,
             translateY: -centerY / 2
           }));
@@ -106,7 +154,7 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
         setZoomState(prev => ({ ...prev, lastTap: currentTime }));
       }
       
-      if (zoomState.scale > 1) {
+      if (zoomState.scale > optimalScale) {
         setIsPanning(true);
       }
     } else if (e.touches.length === 2) {
@@ -119,7 +167,7 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
   };
 
   const handleTouchMove = (e) => {
-    if (e.touches.length === 1 && isPanning && zoomState.scale > 1) {
+    if (e.touches.length === 1 && isPanning && zoomState.scale > optimalScale) {
       // Pan gesture - prevent default to avoid scrolling
       e.preventDefault();
       const touch = e.touches[0];
@@ -140,7 +188,7 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
       
       if (lastDistance > 0) {
         const scaleFactor = distance / lastDistance;
-        const newScale = Math.min(Math.max(zoomState.scale * scaleFactor, 1), 4);
+        const newScale = Math.min(Math.max(zoomState.scale * scaleFactor, optimalScale), 4);
         
         setZoomState(prev => ({
           ...prev,
@@ -151,7 +199,7 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
       setLastDistance(distance);
     } else if (e.touches.length === 1 && !isPanning) {
       // Check for swipe to close (only when not zoomed) - allow default for regular scrolling
-      if (zoomState.scale === 1) {
+      if (zoomState.scale === optimalScale) {
         setCurrentY(e.touches[0].clientY);
       }
     }
@@ -163,7 +211,7 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
       setLastDistance(0);
       
       // Handle swipe to close (only when not zoomed)
-      if (zoomState.scale === 1) {
+      if (zoomState.scale === optimalScale) {
         const deltaY = currentY - startY;
         if (deltaY > 100) {
           onClose();
@@ -220,21 +268,37 @@ function SingleCertificateModal({ isOpen, onClose, certificate }) {
         <div 
           className="single-certificate-container"
           onWheel={handleWheel}
+          ref={containerRef}
         >
-          <div className="certificate-image-container">
+          {!imageLoaded && (
+            <div className="certificate-loading">
+              <div className="loading-spinner"></div>
+              <p>Loading certificate...</p>
+            </div>
+          )}
+          
+          <div className="certificate-image-container" style={{ opacity: imageLoaded ? 1 : 0 }}>
             <img
+              ref={imageRef}
               src={certificate.image}
               alt={certificate.title}
               className="certificate-image"
               loading="lazy"
+              onLoad={handleImageLoad}
               style={{
                 transform: `scale(${zoomState.scale}) translate(${zoomState.translateX}px, ${zoomState.translateY}px)`,
                 transformOrigin: 'center center',
-                transition: zoomState.scale === 1 ? 'transform 0.3s ease-out' : 'none',
-                cursor: zoomState.scale > 1 ? 'grab' : 'default'
+                transition: zoomState.scale === optimalScale ? 'transform 0.3s ease-out' : 'none',
+                cursor: zoomState.scale > optimalScale ? 'grab' : 'default'
               }}
             />
           </div>
+          
+          {imageLoaded && zoomState.scale > optimalScale && (
+            <div className="zoom-indicator">
+              {Math.round(zoomState.scale / optimalScale * 100)}%
+            </div>
+          )}
         </div>
       </div>
     </div>

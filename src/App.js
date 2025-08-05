@@ -6,6 +6,7 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import Preloader from "../src/components/Pre";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -32,6 +33,14 @@ function App() {
     sessionStorage.removeItem('hasSeenModalThisLoad');
     sessionStorage.removeItem('hasNavigatedInSession');
     sessionStorage.setItem('isInitialLoad', 'true');
+    
+    // Reset animations on page refresh (but not on navigation)
+    const isPageRefresh = performance.navigation.type === performance.navigation.TYPE_RELOAD;
+    if (isPageRefresh) {
+      sessionStorage.removeItem('heroAnimated');
+      sessionStorage.removeItem('projectsAnimated');
+      sessionStorage.removeItem('aboutAnimated');
+    }
     
     const timer = setTimeout(() => {
       upadateLoad(false);
@@ -78,6 +87,56 @@ function App() {
     return null;
   }
 
+  function AnimatedRoutes() {
+    const location = useLocation();
+    
+    const pageVariants = {
+      initial: {
+        opacity: 0,
+        y: 20,
+        scale: 0.98
+      },
+      in: {
+        opacity: 1,
+        y: 0,
+        scale: 1
+      },
+      out: {
+        opacity: 0,
+        y: -20,
+        scale: 1.02
+      }
+    };
+
+    const pageTransition = {
+      type: "tween",
+      ease: "anticipate",
+      duration: 0.5
+    };
+
+    return (
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial="initial"
+          animate="in"
+          exit="out"
+          variants={pageVariants}
+          transition={pageTransition}
+        >
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/project" element={<Projects />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="/certificates" element={<Certificates />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
+    );
+  }
+
   return (
     <ErrorBoundary>
       <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
@@ -87,14 +146,7 @@ function App() {
           <Navbar />
           <ScrollToTop />
           <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/project" element={<Projects />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/resume" element={<Resume />} />
-              <Route path="/certificates" element={<Certificates />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
+            <AnimatedRoutes />
           </Suspense>
           <Footer />
           <CertificateModal 

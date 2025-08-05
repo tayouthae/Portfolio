@@ -73,20 +73,82 @@ button:focus {
 }
 
 /* --------- */
-/* Mobile Optimizations */
+/* Mobile Optimizations & Enhanced UX */
 /* --------- */
 * {
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Enhanced button interactions */
+.btn {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Card hover effects */
+.project-card-view {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Enhanced Navigation */
+.navbar-nav .nav-link {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  position: relative;
+  border-bottom: 2px solid transparent !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #c770f0 !important;
+  transform: translateY(-1px);
+}
+
+.navbar-nav .nav-link.active {
+  color: #c770f0 !important;
+  border-bottom-color: #c770f0 !important;
+}
+
+/* Mobile Optimizations */
 @media (max-width: 768px) {
   .project-card {
     touch-action: manipulation;
+    margin-bottom: 20px !important;
   }
   
   .navbar-nav .nav-link {
     padding: 15px 20px !important;
     font-size: 1.1rem !important;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    background-color: rgba(199, 112, 240, 0.1);
+    border-radius: 8px;
   }
   
   .home-header h1 {
@@ -96,6 +158,31 @@ button:focus {
   .home-about-body {
     font-size: 1rem !important;
     line-height: 1.6 !important;
+  }
+
+  /* Mobile-first button sizing */
+  .btn-lg {
+    padding: 14px 28px !important;
+    font-size: 1rem !important;
+  }
+
+  /* Better touch targets */
+  .project-card-view .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improved spacing on mobile */
+  .home-content {
+    padding: 20px 15px !important;
+  }
+
+  /* Mobile navigation improvements */
+  .navbar-collapse {
+    background: rgba(0, 0, 0, 0.95);
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 20px;
   }
   
   .tech-icons {
