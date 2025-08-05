@@ -73,6 +73,64 @@ button:focus {
 }
 
 /* --------- */
+/* Mobile Optimizations */
+/* --------- */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    touch-action: manipulation;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 15px 20px !important;
+    font-size: 1.1rem !important;
+  }
+  
+  .home-header h1 {
+    font-size: 2rem !important;
+  }
+  
+  .home-about-body {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+  
+  .tech-icons {
+    padding: 10px !important;
+    margin: 5px !important;
+  }
+}
+
+/* Smooth scrolling for all browsers */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improve button touch targets on mobile */
+@media (max-width: 768px) {
+  .btn, button, .social-icons a {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 20px;
+  }
+}
+
+/* --------- */
+/* Loading Spinner */
+/* --------- */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --------- */
 /* Navbar Section  */
 /* --------- */
 .sticky {

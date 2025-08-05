@@ -1,47 +1,16 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import homeImg from "../../Assets/homeImg.png";
 import Particle from "../Particle";
-import Home2 from "./Home2";
-import Type from "./Type";
+import HeroSection from "./HeroSection";
+import IntroSection from "./IntroSection";
+import SocialLinks from "./SocialLinks";
 
 function Home() {
   return (
     <section>
-      <Container fluid className="home-section" id="home">
-        <Particle />
-        <Container className="home-content">
-          <Row>
-            <Col md={7} className="home-header">
-              <h1 style={{ paddingBottom: 15 }} className="heading">
-                Hi There!{" "}
-                <span className="wave" role="img" aria-labelledby="wave">
-                  👋🏻
-                </span>
-              </h1>
-
-              <h1 className="heading-name">
-                I'M
-                <strong className="main-name"> TAYOUTH MALLA</strong>
-              </h1>
-
-              <div style={{ padding: 50, textAlign: "left" }}>
-                <Type />
-              </div>
-            </Col>
-
-            <Col md={5} style={{ paddingBottom: 20 }}>
-              <img
-                src={homeImg}
-                alt="home pic"
-                className="img-fluid"
-                style={{ maxHeight: "450px" }}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </Container>
-      <Home2 />
+      <Particle />
+      <HeroSection />
+      <IntroSection />
+      <SocialLinks />
     </section>
   );
 }

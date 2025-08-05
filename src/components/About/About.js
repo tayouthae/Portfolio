@@ -6,6 +6,7 @@ import Techstack from "./Techstack";
 import Aboutcard from "./AboutCard";
 import teachingImg from "../../Assets/teaching.png";
 import Toolstack from "./Toolstack";
+import LazyImage from "../LazyImage";
 
 function About() {
   return (
@@ -31,7 +32,7 @@ function About() {
             style={{ paddingTop: "120px", paddingBottom: "50px" }}
             className="about-img"
           >
-            <img src={teachingImg} alt="about" className="img-fluid" />
+            <LazyImage src={teachingImg} alt="about" className="img-fluid" />
           </Col>
         </Row>
         <h1 className="project-heading">

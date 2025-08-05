@@ -1,13 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Preloader from "../src/components/Pre";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home/Home";
-import About from "./components/About/About";
-import Projects from "./components/Projects/Projects";
-import Footer from "./components/Footer";
-import Resume from "./components/Resume/ResumeNew";
-import Certificates from "./components/Certificates/Certificates";
-import CertificateModal from "./components/Certificates/CertificateModal";
+import React, { useState, useEffect, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,10 +6,22 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
+import Preloader from "../src/components/Pre";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import CertificateModal from "./components/Certificates/CertificateModal";
+import LoadingSpinner from "./components/LoadingSpinner";
+import ErrorBoundary from "./components/ErrorBoundary";
 import ScrollToTop from "./components/ScrollToTop";
 import "./style.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+const Home = React.lazy(() => import("./components/Home/Home"));
+const About = React.lazy(() => import("./components/About/About"));
+const Projects = React.lazy(() => import("./components/Projects/Projects"));
+const Resume = React.lazy(() => import("./components/Resume/ResumeNew"));
+const Certificates = React.lazy(() => import("./components/Certificates/Certificates"));
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -76,27 +79,31 @@ function App() {
   }
 
   return (
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <Preloader load={load} />
-      <div className="App" id={load ? "no-scroll" : "scroll"}>
-        <NavigationTracker />
-        <Navbar />
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/project" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/certificates" element={<Certificates />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-        <Footer />
-        <CertificateModal 
-          isOpen={showCertModal} 
-          onClose={handleCloseCertModal} 
-        />
-      </div>
-    </Router>
+    <ErrorBoundary>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Preloader load={load} />
+        <div className="App" id={load ? "no-scroll" : "scroll"}>
+          <NavigationTracker />
+          <Navbar />
+          <ScrollToTop />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/project" element={<Projects />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/resume" element={<Resume />} />
+              <Route path="/certificates" element={<Certificates />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </Suspense>
+          <Footer />
+          <CertificateModal 
+            isOpen={showCertModal} 
+            onClose={handleCloseCertModal} 
+          />
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 }
 
