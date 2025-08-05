@@ -13,6 +13,7 @@ import {
   Route,
   Routes,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import "./style.css";
@@ -24,6 +25,9 @@ function App() {
   const [showCertModal, setShowCertModal] = useState(false);
 
   useEffect(() => {
+    sessionStorage.removeItem('hasSeenModalThisLoad');
+    sessionStorage.setItem('isInitialLoad', 'true');
+    
     const timer = setTimeout(() => {
       upadateLoad(false);
     }, 1200);
@@ -33,10 +37,13 @@ function App() {
 
   useEffect(() => {
     if (!load) {
-      const hasSeenCertModal = localStorage.getItem('hasSeenCertificateModal');
-      if (!hasSeenCertModal) {
+      const hasNavigatedInSession = sessionStorage.getItem('hasNavigatedInSession');
+      const hasSeenModalThisLoad = sessionStorage.getItem('hasSeenModalThisLoad');
+      
+      if (!hasNavigatedInSession && !hasSeenModalThisLoad) {
         const modalTimer = setTimeout(() => {
           setShowCertModal(true);
+          sessionStorage.setItem('hasSeenModalThisLoad', 'true');
         }, 1500);
         return () => clearTimeout(modalTimer);
       }
@@ -45,13 +52,32 @@ function App() {
 
   const handleCloseCertModal = () => {
     setShowCertModal(false);
-    localStorage.setItem('hasSeenCertificateModal', 'true');
   };
+
+  function NavigationTracker() {
+    const location = useLocation();
+    
+    useEffect(() => {
+      const currentPath = sessionStorage.getItem('currentPath');
+      const isInitialLoad = sessionStorage.getItem('isInitialLoad');
+      
+      if (currentPath && currentPath !== location.pathname && !isInitialLoad) {
+        // This is actual navigation, not a page load
+        sessionStorage.setItem('hasNavigatedInSession', 'true');
+      }
+      
+      sessionStorage.setItem('currentPath', location.pathname);
+      sessionStorage.removeItem('isInitialLoad'); // Remove after first useEffect
+    }, [location]);
+
+    return null;
+  }
 
   return (
     <Router>
       <Preloader load={load} />
       <div className="App" id={load ? "no-scroll" : "scroll"}>
+        <NavigationTracker />
         <Navbar />
         <ScrollToTop />
         <Routes>

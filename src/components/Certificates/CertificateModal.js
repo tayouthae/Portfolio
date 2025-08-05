@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { CertificateConstants } from "./CertificateConstants";
@@ -13,13 +13,19 @@ function CertificateModal({ isOpen, onClose }) {
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
 
+  const preventZoom = useCallback((e) => {
+    if (e.touches.length > 1) {
+      e.preventDefault();
+    }
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
       document.body.style.overflow = "hidden";
-      // Prevent zoom on double tap for iOS
       document.addEventListener('touchstart', preventZoom, { passive: false });
     } else {
+      setIsVisible(false);
       document.body.style.overflow = "unset";
       document.removeEventListener('touchstart', preventZoom);
     }
@@ -28,18 +34,16 @@ function CertificateModal({ isOpen, onClose }) {
       document.body.style.overflow = "unset";
       document.removeEventListener('touchstart', preventZoom);
     };
-  }, [isOpen]);
-
-  const preventZoom = (e) => {
-    if (e.touches.length > 1) {
-      e.preventDefault();
-    }
-  };
+  }, [isOpen, preventZoom]);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
+  };
+
+  const handleCloseButtonClick = () => {
+    onClose();
   };
 
   const handleTouchStart = (e) => {
@@ -84,10 +88,11 @@ function CertificateModal({ isOpen, onClose }) {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onClick={(e) => e.stopPropagation()}
       >
         <button 
           className="certificate-modal-close" 
-          onClick={onClose}
+          onClick={handleCloseButtonClick}
           aria-label="Close modal"
         >
           ✕
