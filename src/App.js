@@ -6,6 +6,8 @@ import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
 import Footer from "./components/Footer";
 import Resume from "./components/Resume/ResumeNew";
+import Certificates from "./components/Certificates/Certificates";
+import CertificateModal from "./components/Certificates/CertificateModal";
 import {
   BrowserRouter as Router,
   Route,
@@ -19,6 +21,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [load, upadateLoad] = useState(true);
+  const [showCertModal, setShowCertModal] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,6 +30,23 @@ function App() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!load) {
+      const hasSeenCertModal = localStorage.getItem('hasSeenCertificateModal');
+      if (!hasSeenCertModal) {
+        const modalTimer = setTimeout(() => {
+          setShowCertModal(true);
+        }, 1500);
+        return () => clearTimeout(modalTimer);
+      }
+    }
+  }, [load]);
+
+  const handleCloseCertModal = () => {
+    setShowCertModal(false);
+    localStorage.setItem('hasSeenCertificateModal', 'true');
+  };
 
   return (
     <Router>
@@ -39,9 +59,14 @@ function App() {
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/certificates" element={<Certificates />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />
+        <CertificateModal 
+          isOpen={showCertModal} 
+          onClose={handleCloseCertModal} 
+        />
       </div>
     </Router>
   );
