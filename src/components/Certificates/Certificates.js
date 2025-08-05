@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CertificateCard from "./CertificateCard";
+import SingleCertificateModal from "./SingleCertificateModal";
 import Particle from "../Particle";
 import { CertificateConstants } from "./CertificateConstants";
 import "./Certificates.css";
 
 function Certificates() {
+  const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCertificateClick = (certificate) => {
+    setSelectedCertificate(certificate);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedCertificate(null);
+  };
+
   return (
-    <Container fluid className="certificate-page">
+    <Container fluid className="project-section">
       <Particle />
       <Container>
         <h1 className="project-heading">
@@ -18,12 +32,21 @@ function Certificates() {
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
           {CertificateConstants.map((certificate) => (
-            <Col md={6} lg={4} className="project-card" key={certificate.id}>
-              <CertificateCard certificate={certificate} />
+            <Col md={4} className="project-card" key={certificate.id}>
+              <CertificateCard 
+                certificate={certificate} 
+                onClick={handleCertificateClick}
+              />
             </Col>
           ))}
         </Row>
       </Container>
+      
+      <SingleCertificateModal 
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        certificate={selectedCertificate}
+      />
     </Container>
   );
 }

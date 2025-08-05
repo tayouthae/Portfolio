@@ -25,7 +25,9 @@ function App() {
   const [showCertModal, setShowCertModal] = useState(false);
 
   useEffect(() => {
+    // Clear all modal-related flags on page load/refresh
     sessionStorage.removeItem('hasSeenModalThisLoad');
+    sessionStorage.removeItem('hasNavigatedInSession');
     sessionStorage.setItem('isInitialLoad', 'true');
     
     const timer = setTimeout(() => {
@@ -74,7 +76,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Preloader load={load} />
       <div className="App" id={load ? "no-scroll" : "scroll"}>
         <NavigationTracker />

@@ -16,8 +16,8 @@ function Projects() {
           Here are a few projects I've worked on recently.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
-          {ProjectConstants.map((project) => (
-            <Col md={4} className="project-card">
+          {ProjectConstants.map((project, index) => (
+            <Col md={4} className="project-card" key={index}>
               <ProjectCard
                 imgPath={project.imgPath}
                 title={project.title}

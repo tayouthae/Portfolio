@@ -326,42 +326,57 @@
   }
 }
 
-/* Certificate Page Styles */
-.certificate-page {
-  min-height: 100vh;
-  background: var(--section-background-color);
-  padding-top: 150px;
-  padding-bottom: 50px;
+/* Single Certificate Modal */
+.single-certificate-modal {
+  max-width: 95vw;
+  max-height: 95vh;
 }
 
-.certificate-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(199, 112, 240, 0.2);
-  border-radius: 15px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.certificate-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(199, 112, 240, 0.5);
-  box-shadow: 0 15px 30px rgba(199, 112, 240, 0.1);
-}
-
-.certificate-card-image {
+.single-certificate-container {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.certificate-card-title {
-  color: #ffffff;
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-align: center;
-  margin: 0;
+.single-certificate-container .certificate-image-container {
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.single-certificate-container .certificate-image {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+}
+
+/* Responsive adjustments for single certificate modal */
+@media (max-width: 768px) {
+  .single-certificate-modal {
+    max-width: 98vw;
+    max-height: 98vh;
+    padding: 1rem;
+  }
+
+  .single-certificate-container .certificate-image {
+    max-height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .single-certificate-modal {
+    margin: 0.25rem;
+    padding: 0.75rem;
+  }
+
+  .single-certificate-container .certificate-image {
+    max-height: 65vh;
+  }
+}
+
+/* Certificate Page Styles */

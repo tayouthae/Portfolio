@@ -1,14 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { CertificateConstants } from "./CertificateConstants";
 import "./Certificates.css";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
-function CertificateModal({ isOpen, onClose }) {
+function SingleCertificateModal({ isOpen, onClose, certificate }) {
   const [isVisible, setIsVisible] = useState(false);
   const [startY, setStartY] = useState(0);
   const [currentY, setCurrentY] = useState(0);
@@ -197,12 +190,12 @@ function CertificateModal({ isOpen, onClose }) {
     }
   }, [isOpen, onClose]);
 
-  if (!isVisible) return null;
+  if (!isVisible || !certificate) return null;
 
   return (
     <div className="certificate-modal-overlay" onClick={handleOverlayClick}>
       <div 
-        className="certificate-modal"
+        className="certificate-modal single-certificate-modal"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -220,67 +213,32 @@ function CertificateModal({ isOpen, onClose }) {
 
         <div className="certificate-modal-header">
           <h2 className="certificate-modal-title">
-            <span className="trophy">🏆</span>
-            Recent Professional Achievements
+            {certificate.title}
           </h2>
         </div>
 
         <div 
-          className="certificate-slider-container"
+          className="single-certificate-container"
           onWheel={handleWheel}
         >
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            navigation={{
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            }}
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: true,
-              pauseOnMouseEnter: true,
-            }}
-            loop={CertificateConstants.length > 1}
-            spaceBetween={30}
-            slidesPerView={1}
-            speed={400}
-            touchRatio={zoomState.scale === 1 ? 1.2 : 0}
-            threshold={20}
-            touchStartPreventDefault={false}
-            resistanceRatio={0.5}
-            longSwipesRatio={0.3}
-            allowTouchMove={zoomState.scale === 1}
-            className="certificate-swiper"
-          >
-            {CertificateConstants.map((certificate) => (
-              <SwiperSlide key={certificate.id} className="certificate-slide">
-                <div className="certificate-image-container">
-                  <img
-                    src={certificate.image}
-                    alt={certificate.title}
-                    className="certificate-image"
-                    loading="lazy"
-                    style={{
-                      transform: `scale(${zoomState.scale}) translate(${zoomState.translateX}px, ${zoomState.translateY}px)`,
-                      transformOrigin: 'center center',
-                      transition: zoomState.scale === 1 ? 'transform 0.3s ease-out' : 'none',
-                      cursor: zoomState.scale > 1 ? 'grab' : 'default'
-                    }}
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-            <div className="swiper-button-next"></div>
-            <div className="swiper-button-prev"></div>
-          </Swiper>
+          <div className="certificate-image-container">
+            <img
+              src={certificate.image}
+              alt={certificate.title}
+              className="certificate-image"
+              loading="lazy"
+              style={{
+                transform: `scale(${zoomState.scale}) translate(${zoomState.translateX}px, ${zoomState.translateY}px)`,
+                transformOrigin: 'center center',
+                transition: zoomState.scale === 1 ? 'transform 0.3s ease-out' : 'none',
+                cursor: zoomState.scale > 1 ? 'grab' : 'default'
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default CertificateModal;
+export default SingleCertificateModal;
