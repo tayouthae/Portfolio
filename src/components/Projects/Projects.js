@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
+import ScrollIndicator from "../ScrollIndicator";
 import { ProjectConstants } from "./ProjectConstants";
 
 function Projects() {
@@ -53,7 +54,7 @@ function Projects() {
             </p>
           </motion.div>
           
-          <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
+          <Row id="projects-container" style={{ justifyContent: "center", paddingBottom: "10px" }}>
             {ProjectConstants.map((project, index) => (
               <Col md={4} className="project-card" key={index} style={{ marginBottom: "30px" }}>
                 <ProjectCard
@@ -69,6 +70,7 @@ function Projects() {
           </Row>
         </motion.div>
       </Container>
+      <ScrollIndicator containerId="projects-container" />
     </Container>
   );
 }

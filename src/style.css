@@ -544,6 +544,52 @@ html {
 }
 
 /* --------- */
+/* Scroll Indicator */
+/* --------- */
+.scroll-indicator {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.scroll-arrow {
+  color: var(--imp-text-color);
+  opacity: 0.8;
+  filter: drop-shadow(0 2px 8px rgba(199, 112, 240, 0.3));
+}
+
+.scroll-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .scroll-indicator {
+    bottom: 30px;
+  }
+  
+  .scroll-text {
+    font-size: 11px;
+  }
+  
+  .scroll-arrow {
+    transform: scale(0.9);
+  }
+}
+
+/* --------- */
 /* Footer */
 /* --------- */
 .footer {
