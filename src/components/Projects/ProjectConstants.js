@@ -11,8 +11,15 @@ import Vision from "../../Assets/Projects/20Vision.png";
 import EudaimoniaWiki from "../../Assets/Projects/eudaimoniaWiki.png";
 import BigDataProject from "../../Assets/Projects/BigDataProject.jpg";
 import BasketballAnalytics from "../../Assets/Projects/BasketballAnalytics.png";
+import LawgicBot from "../../Assets/Projects/LawgicBot.png";
 
 export const ProjectConstants = [
+  {
+    imgPath: LawgicBot,
+    title: "LawgicBot",
+    desc: "Full-stack legal education platform featuring AI agent workflows, RAG-powered FastAPI backend, React frontend, and automated PDF generation - with conversational AI, real-time document creation, and deployed on Google Cloud with zero data retention architecture.",
+    demoLink: "https://dallas-ai-psi.vercel.app",
+  },
   {
     imgPath: BasketballAnalytics,
     title: "Basketball Analytics",
