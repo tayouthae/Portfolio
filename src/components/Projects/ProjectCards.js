@@ -55,39 +55,41 @@ function ProjectCards({
         </Card.Body>
 
         <Card.Footer>
-          {demoLink && (
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button variant="primary" href={demoLink} target="_blank">
-                <CgWebsite /> &nbsp; Demo
-              </Button>
-            </motion.div>
-          )}
+          <div className="project-buttons-container">
+            {demoLink && (
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button variant="primary" href={demoLink} target="_blank" className="project-btn">
+                  <CgWebsite /> &nbsp; Demo
+                </Button>
+              </motion.div>
+            )}
 
-          {gitHubLink && (
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant="primary"
-                href={gitHubLink}
-                target="_blank"
-                style={{ marginLeft: "10px" }}
-              >
-                <BsGithub /> &nbsp; GitHub
-              </Button>
-            </motion.div>
-          )}
+            {gitHubLink && (
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  variant="primary"
+                  href={gitHubLink}
+                  target="_blank"
+                  className="project-btn"
+                >
+                  <BsGithub /> &nbsp; GitHub
+                </Button>
+              </motion.div>
+            )}
 
-          {vercelLink && (
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant="primary"
-                href={vercelLink}
-                target="_blank"
-                style={{ marginLeft: "10px" }}
-              >
-                <SiVercel /> &nbsp; Vercel
-              </Button>
-            </motion.div>
-          )}
+            {vercelLink && (
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  variant="primary"
+                  href={vercelLink}
+                  target="_blank"
+                  className="project-btn"
+                >
+                  <SiVercel /> &nbsp; Vercel
+                </Button>
+              </motion.div>
+            )}
+          </div>
         </Card.Footer>
       </Card>
     </motion.div>
