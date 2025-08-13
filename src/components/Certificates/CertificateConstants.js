@@ -1,11 +1,17 @@
 import VerityAdvisorsCert from "../../Assets/Certificates/Tayouth Malla VerityAdvisors.png";
 import UpworkRisingTalent from "../../Assets/Certificates/Rising Talent Upwork.png";
+import DallasAICert from "../../Assets/Certificates/Dallas AI.png";
 
 export const CertificateConstants = [
   {
     id: "verity-advisors-2025",
     title: "Cloud-Native ETL & Analytics Pipeline",
     image: VerityAdvisorsCert,
+  },
+  {
+    id: "dallas-ai",
+    title: "Dallas AI",
+    image: DallasAICert,
   },
   {
     id: "upwork-rising-talent",
