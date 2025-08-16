@@ -40,7 +40,7 @@ function SocialLinks() {
               </li>
               <li className="social-icons">
                 <a
-                  href="https://www.linkedin.com/in/tayouth-malla-183615177/"
+                  href="https://www.linkedin.com/in/tayouthmalla"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour  home-social-icons"
