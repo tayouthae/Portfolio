@@ -1,16 +1,19 @@
 import React from "react";
-import Typewriter from "typewriter-effect";
+import { Typewriter } from "react-simple-typewriter";
 
 function Type() {
   return (
-    <Typewriter
-      options={{
-        strings: ["Developer", "Full Stack Developer"],
-        autoStart: true,
-        loop: true,
-        deleteSpeed: 50,
-      }}
-    />
+    <span className="typewriter-wrapper">
+      <Typewriter
+        words={["Developer", "Full Stack Developer"]}
+        loop={true}
+        cursor
+        cursorStyle="|"
+        typeSpeed={70}
+        deleteSpeed={50}
+        delaySpeed={1000}
+      />
+    </span>
   );
 }
 

@@ -436,7 +436,8 @@ html {
   color: #cd5ff8;
 }
 
-.Typewriter__wrapper {
+.Typewriter__wrapper,
+.typewriter-wrapper {
   font-size: 2.2em !important;
   color: #be6adf !important;
   font-weight: 600 !important;
@@ -447,7 +448,8 @@ html {
 }
 
 @media (max-width: 767px) {
-  .Typewriter__wrapper {
+  .Typewriter__wrapper,
+  .typewriter-wrapper {
     font-size: 1.4em !important;
     font-weight: 500 !important;
     position: absolute !important;
