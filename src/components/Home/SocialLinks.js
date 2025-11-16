@@ -21,9 +21,9 @@ function SocialLinks() {
               <li className="social-icons">
                 <a
                   href="https://github.com/tayouthae"
+                  style={{ color: "white" }}
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour  home-social-icons"
                 >
                   <AiFillGithub />
                 </a>
@@ -31,9 +31,9 @@ function SocialLinks() {
               <li className="social-icons">
                 <a
                   href="https://twitter.com/tayouth_12"
+                  style={{ color: "white" }}
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour  home-social-icons"
                 >
                   <AiOutlineTwitter />
                 </a>
@@ -41,9 +41,9 @@ function SocialLinks() {
               <li className="social-icons">
                 <a
                   href="https://www.linkedin.com/in/tayouthmalla"
+                  style={{ color: "white" }}
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour  home-social-icons"
                 >
                   <FaLinkedinIn />
                 </a>
@@ -51,9 +51,9 @@ function SocialLinks() {
               <li className="social-icons">
                 <a
                   href="https://www.instagram.com/tayouth__/"
+                  style={{ color: "white" }}
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour home-social-icons"
                 >
                   <AiFillInstagram />
                 </a>

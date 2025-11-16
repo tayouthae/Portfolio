@@ -539,6 +539,22 @@ html {
   padding-left: 15px;
 }
 
+.social-icons a {
+  font-size: 1.8em;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-5px);
+  color: #c770f0 !important;
+}
+
+@media (max-width: 767px) {
+  .social-icons a {
+    font-size: 1.5em;
+  }
+}
+
 .icon-colour {
   color: #700c86 !important;
 }
