@@ -1,106 +1,95 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ScrollIndicator = ({ containerId = "projects-container" }) => {
-  const [showIndicator, setShowIndicator] = useState(true);
-  const [isVisible, setIsVisible] = useState(false);
+const ScrollIndicator = ({ containerId = "projects-container", isMobile = false }) => {
+  const [showIndicator, setShowIndicator] = useState(false);
+  const [hiddenCount, setHiddenCount] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const checkVisibility = () => {
       const projectsContainer = document.querySelector(`#${containerId}`);
       if (!projectsContainer) return;
 
-      const containerRect = projectsContainer.getBoundingClientRect();
-      const containerBottom = containerRect.bottom;
       const windowHeight = window.innerHeight;
-      
       const projectCards = projectsContainer.querySelectorAll('.project-card');
+      
       if (projectCards.length === 0) return;
 
-      const totalCards = projectCards.length;
-      const cardsPerRow = 3;
-      const lastRowStartIndex = Math.floor((totalCards - 1) / cardsPerRow) * cardsPerRow;
-      const lastRowCards = Array.from(projectCards).slice(lastRowStartIndex);
-      
-      let lastRowVisible = false;
+      let hiddenCards = 0;
+      let allVisible = true;
 
-      lastRowCards.forEach(card => {
+      projectCards.forEach(card => {
         const cardRect = card.getBoundingClientRect();
-        if (cardRect.top < windowHeight - 100) {
-          lastRowVisible = true;
+        if (cardRect.top > windowHeight - 50) {
+          hiddenCards++;
+          allVisible = false;
         }
       });
 
-      if (lastRowVisible || containerBottom <= windowHeight + 50) {
-        setShowIndicator(false);
-      } else {
-        setShowIndicator(true);
-      }
+      setHiddenCount(hiddenCards);
+      setShowIndicator(!allVisible && hiddenCards > 0);
     };
 
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 1000);
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
+    const timer = setTimeout(checkVisibility, 300);
+    window.addEventListener("scroll", checkVisibility, { passive: true });
+    window.addEventListener("resize", checkVisibility, { passive: true });
+    
     return () => {
-      window.removeEventListener("scroll", handleScroll);
       clearTimeout(timer);
+      window.removeEventListener("scroll", checkVisibility);
+      window.removeEventListener("resize", checkVisibility);
     };
   }, [containerId]);
 
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <AnimatePresence>
-      {showIndicator && isVisible && (
+      {showIndicator && (
         <motion.div
           className="scroll-indicator"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
-          <motion.div
-            className="scroll-arrow"
-            animate={{ y: [0, 8, 0] }}
+          <motion.div 
+            className="scroll-hint"
+            animate={{ y: [0, 4, 0] }}
             transition={{
-              duration: 1.5,
+              duration: 2,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           >
             <svg
-              width="24"
-              height="24"
+              width="32"
+              height="32"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="scroll-icon"
             >
-              <path
-                d="M7 13L12 18L17 13"
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
                 stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                strokeWidth="1.5"
+                opacity="0.3"
               />
               <path
-                d="M7 6L12 11L17 6"
+                d="M12 8v8m0 0l-3-3m3 3l3-3"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </svg>
+            <span className="scroll-count">{hiddenCount} more</span>
           </motion.div>
-          <motion.p
-            className="scroll-text"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            Scroll to see more projects
-          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>

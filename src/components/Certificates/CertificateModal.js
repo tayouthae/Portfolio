@@ -43,7 +43,6 @@ function CertificateModal({ isOpen, onClose }) {
 
   // Mouse wheel zoom for desktop
   const handleWheel = useCallback((e) => {
-    e.preventDefault();
     const delta = e.deltaY > 0 ? 0.9 : 1.1;
     const newScale = Math.min(Math.max(zoomState.scale * delta, 1), 4);
     
@@ -58,18 +57,37 @@ function CertificateModal({ isOpen, onClose }) {
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
-      resetZoom(); // Reset zoom when modal opens
+      resetZoom();
       document.body.style.overflow = "hidden";
     } else {
       setIsVisible(false);
       document.body.style.overflow = "unset";
-      resetZoom(); // Reset zoom when modal closes
+      resetZoom();
     }
 
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [isOpen, resetZoom]);
+
+  useEffect(() => {
+    const wheelHandler = (e) => {
+      if (e.target.closest('.certificate-slider-container')) {
+        e.preventDefault();
+        handleWheel(e);
+      }
+    };
+
+    if (isOpen) {
+      const container = document.querySelector('.certificate-slider-container');
+      if (container) {
+        container.addEventListener('wheel', wheelHandler, { passive: false });
+        return () => {
+          container.removeEventListener('wheel', wheelHandler);
+        };
+      }
+    }
+  }, [isOpen, handleWheel]);
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -227,7 +245,6 @@ function CertificateModal({ isOpen, onClose }) {
 
         <div 
           className="certificate-slider-container"
-          onWheel={handleWheel}
         >
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}

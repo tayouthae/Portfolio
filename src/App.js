@@ -89,12 +89,13 @@ function App() {
 
   function AnimatedRoutes() {
     const location = useLocation();
+    const isMobile = window.innerWidth <= 768;
     
     const pageVariants = {
       initial: {
-        opacity: 0,
-        y: 20,
-        scale: 0.98
+        opacity: isMobile ? 1 : 0,
+        y: isMobile ? 0 : 20,
+        scale: isMobile ? 1 : 0.98
       },
       in: {
         opacity: 1,
@@ -102,16 +103,16 @@ function App() {
         scale: 1
       },
       out: {
-        opacity: 0,
-        y: -20,
-        scale: 1.02
+        opacity: isMobile ? 1 : 0,
+        y: isMobile ? 0 : -20,
+        scale: isMobile ? 1 : 1.02
       }
     };
 
     const pageTransition = {
       type: "tween",
-      ease: "anticipate",
-      duration: 0.5
+      ease: "easeOut",
+      duration: isMobile ? 0.15 : 0.3
     };
 
     return (

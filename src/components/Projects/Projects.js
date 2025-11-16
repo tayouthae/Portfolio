@@ -7,25 +7,41 @@ import ScrollIndicator from "../ScrollIndicator";
 import { ProjectConstants } from "./ProjectConstants";
 
 function Projects() {
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+  const [showParticles, setShowParticles] = React.useState(false);
   const hasAnimated = sessionStorage.getItem('projectsAnimated');
+  const skipAnimation = isMobile || hasAnimated;
   
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowParticles(true);
+    }, isMobile ? 100 : 0);
+    return () => clearTimeout(timer);
+  }, [isMobile]);
+
   const containerVariants = {
-    hidden: { opacity: hasAnimated ? 1 : 0 },
+    hidden: { opacity: skipAnimation ? 1 : 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: hasAnimated ? 0 : 0.8,
-        staggerChildren: hasAnimated ? 0 : 0.1
+        duration: skipAnimation ? 0 : 0.8,
+        staggerChildren: skipAnimation ? 0 : 0.1
       }
     }
   };
 
   const headerVariants = {
-    hidden: { opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : -30 },
+    hidden: { opacity: skipAnimation ? 1 : 0, y: skipAnimation ? 0 : -30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: hasAnimated ? 0 : 0.6, ease: "easeOut" }
+      transition: { duration: skipAnimation ? 0 : 0.6, ease: "easeOut" }
     }
   };
 
@@ -37,13 +53,13 @@ function Projects() {
 
   return (
     <Container fluid className="project-section">
-      <Particle />
+      {showParticles && <Particle />}
       <Container>
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           <motion.div variants={headerVariants}>
             <h1 className="project-heading">
@@ -64,13 +80,14 @@ function Projects() {
                   demoLink={project.demoLink}
                   gitHubLink={project.gitHubLink}
                   vercelLink={project.vercelLink}
+                  isMobile={isMobile}
                 />
               </Col>
             ))}
           </Row>
         </motion.div>
       </Container>
-      <ScrollIndicator containerId="projects-container" />
+      <ScrollIndicator containerId="projects-container" isMobile={isMobile} />
     </Container>
   );
 }

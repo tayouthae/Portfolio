@@ -135,9 +135,15 @@ html {
 
 /* Mobile Optimizations */
 @media (max-width: 768px) {
+  .project-section {
+    padding-top: 120px !important;
+  }
+
   .project-card {
     touch-action: manipulation;
     margin-bottom: 20px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
   }
   
   .navbar-nav .nav-link {
@@ -393,6 +399,7 @@ html {
   background-size: cover !important;
   width: 100%;
   height: 100%;
+  z-index: 0 !important;
 }
 
 .home-header {
@@ -564,44 +571,68 @@ html {
 /* --------- */
 .scroll-indicator {
   position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  bottom: 32px;
+  right: 32px;
   z-index: 1000;
   pointer-events: none;
 }
 
-.scroll-arrow {
-  color: var(--imp-text-color);
-  opacity: 0.8;
-  filter: drop-shadow(0 2px 8px rgba(199, 112, 240, 0.3));
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: rgba(199, 112, 240, 0.1);
+  backdrop-filter: blur(12px);
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(199, 112, 240, 0.2);
+  box-shadow: 0 8px 32px rgba(199, 112, 240, 0.15);
 }
 
-.scroll-text {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 12px;
-  margin-top: 8px;
-  margin-bottom: 0;
-  text-align: center;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+.scroll-icon {
+  color: var(--imp-text-color);
+  filter: drop-shadow(0 2px 4px rgba(199, 112, 240, 0.4));
+}
+
+.scroll-count {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
   .scroll-indicator {
-    bottom: 30px;
+    bottom: 20px;
+    right: 20px;
   }
   
-  .scroll-text {
-    font-size: 11px;
+  .scroll-hint {
+    padding: 10px 16px;
+    gap: 6px;
+  }
+
+  .scroll-icon {
+    width: 28px;
+    height: 28px;
   }
   
-  .scroll-arrow {
-    transform: scale(0.9);
+  .scroll-count {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-indicator {
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  .scroll-hint {
+    padding: 8px 14px;
   }
 }
 
@@ -656,6 +687,12 @@ html {
   padding-top: 150px !important;
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
+  z-index: 1 !important;
+}
+
+.project-section .container {
+  position: relative;
+  z-index: 2;
 }
 
 .project-card {
@@ -671,13 +708,27 @@ html {
   color: white !important;
   background-color: transparent !important;
   opacity: 0.9 !important;
-  transition: all 0.5s ease 0s !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
   height: 100% !important;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 .project-card-view:hover {
-  transform: scale(1.02) !important;
+  transform: scale(1.02) translateZ(0) !important;
   overflow: hidden !important;
   box-shadow: 0 4px 4px 5px rgba(129, 72, 144, 0.561) !important;
+}
+
+@media (max-width: 768px) {
+  .project-card-view {
+    transition: none !important;
+    will-change: auto;
+  }
+  
+  .project-card-view:hover {
+    transform: none !important;
+  }
 }
 
 .project-buttons-container {

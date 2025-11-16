@@ -20,8 +20,8 @@ const LazyImage = ({
         }
       },
       {
-        threshold: 0.1,
-        rootMargin: "50px"
+        threshold: 0.01,
+        rootMargin: "100px"
       }
     );
 
@@ -44,40 +44,38 @@ const LazyImage = ({
             src={src}
             alt={alt}
             onLoad={handleLoad}
+            loading="lazy"
+            decoding="async"
             style={{
               opacity: isLoaded ? 1 : 0,
-              transition: "opacity 0.3s ease-in-out",
+              transition: "opacity 0.2s ease-in-out",
               width: "100%",
               height: "100%",
               objectFit: "cover"
             }}
           />
           {!isLoaded && (
-            <img
-              src={placeholder}
-              alt="Loading..."
+            <div
               style={{
                 position: "absolute",
                 top: 0,
                 left: 0,
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
-                filter: "blur(5px)"
+                background: "linear-gradient(135deg, rgba(119, 53, 136, 0.1) 0%, rgba(199, 112, 240, 0.1) 100%)",
+                backdropFilter: "blur(10px)"
               }}
             />
           )}
         </>
       )}
       {!isInView && (
-        <img
-          src={placeholder}
-          alt="Loading..."
+        <div
           style={{
             width: "100%",
             height: "100%",
-            objectFit: "cover",
-            filter: "blur(5px)"
+            background: "linear-gradient(135deg, rgba(119, 53, 136, 0.1) 0%, rgba(199, 112, 240, 0.1) 100%)",
+            backdropFilter: "blur(10px)"
           }}
         />
       )}
