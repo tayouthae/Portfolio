@@ -9,8 +9,15 @@ function IntroSection() {
     <Container fluid className="home-about-section" id="about">
       <Container>
         <Row>
-          <Col md={8} className="home-about-description">
+          <Col xs={12} className="home-about-mobile-heading d-md-none">
             <h1 style={{ fontSize: "2.6em" }}>
+              LET ME <span className="purple"> INTRODUCE </span> MYSELF
+            </h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={8} className="home-about-description order-2 order-md-1">
+            <h1 className="d-none d-md-block" style={{ fontSize: "2.6em" }}>
               LET ME <span className="purple"> INTRODUCE </span> MYSELF
             </h1>
             <p className="home-about-body">
@@ -49,7 +56,7 @@ function IntroSection() {
               </i>
             </p>
           </Col>
-          <Col md={4} className="myAvtar">
+          <Col md={4} className="myAvtar order-1 order-md-2">
             <Tilt>
               <LazyImage src={myImg} className="img-fluid" alt="avatar" />
             </Tilt>

@@ -160,11 +160,6 @@ html {
   .home-header h1 {
     font-size: 2rem !important;
   }
-  
-  .home-about-body {
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-  }
 
   /* Mobile-first button sizing */
   .btn-lg {
@@ -195,20 +190,17 @@ html {
     padding: 10px !important;
     margin: 5px !important;
   }
-}
 
-/* Smooth scrolling for all browsers */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Improve button touch targets on mobile */
-@media (max-width: 768px) {
   .btn, button, .social-icons a {
     min-height: 44px;
     min-width: 44px;
     padding: 12px 20px;
   }
+}
+
+/* Smooth scrolling for all browsers */
+html {
+  scroll-behavior: smooth;
 }
 
 /* --------- */
@@ -464,10 +456,80 @@ html {
   padding-top: 9em !important;
 }
 
+.home-about-mobile-heading {
+  color: white !important;
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.home-about-mobile-heading h1 {
+  font-size: 1.8em !important;
+  line-height: 1.3;
+  margin-bottom: 0;
+}
+
 @media (max-width: 767px) {
+  .home-about-section {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+
   .myAvtar {
-    padding-top: 2em !important;
-    padding-bottom: 2em !important;
+    padding-top: 0 !important;
+    padding-bottom: 40px !important;
+    display: flex;
+    justify-content: center;
+  }
+
+  .home-about-description {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .myAvtar img {
+    max-width: 260px;
+    width: 85%;
+    height: auto;
+  }
+
+  .home-about-body {
+    padding-top: 0 !important;
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-about-mobile-heading {
+    margin-bottom: 32px;
+    padding: 0 16px;
+  }
+
+  .home-about-mobile-heading h1 {
+    font-size: 1.6em !important;
+  }
+
+  .home-about-section {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+  }
+
+  .myAvtar {
+    padding-bottom: 32px !important;
+  }
+
+  .myAvtar img {
+    max-width: 220px;
+    width: 80%;
+  }
+
+  .home-about-body {
+    font-size: 0.95rem !important;
+    line-height: 1.65 !important;
   }
 }
 
@@ -479,8 +541,8 @@ html {
 
 .home-about-description {
   color: white !important;
-  padding-top: 100px !important;
-  padding-bottom: 20px !important;
+  padding-top: 100px ;
+  padding-bottom: 20px;
   text-align: center;
 }
 
